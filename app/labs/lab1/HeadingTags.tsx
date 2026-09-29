@@ -20,6 +20,14 @@ export default function HeadingTags() {
       <h4>h4</h4>
       <h5>h5</h5>
       <h6>h6</h6>
+      <div id="wd-ai-headings">
+        <h4>Lab notes</h4>
+        This section holds a short summary of the lab and what it covers.
+        <h5>What I built</h5>
+        This part describes the pages and components created during the lab.
+        <h6>Next step</h6>
+        This part lists what to work on in the next lab session.
+      </div>
       <div id="wd-your-heading">
         <h4>Yuxin Li (Max)</h4>
         My background is in English and linguistics, and I now study computer
