@@ -12,13 +12,28 @@ export default function YourForm() {
 
       {/* Text fields */}
       <label htmlFor="wd-your-first-name">First Name:</label>
-      <input id="wd-your-first-name" placeholder="Your First Name" />
+      <input
+        id="wd-your-first-name"
+        placeholder="Your first name"
+        defaultValue="Yuxin"
+      />
       <br />
       <label htmlFor="wd-your-last-name">Last Name:</label>
-      <input id="wd-your-last-name" placeholder="Your Last Name" />
+      <input
+        id="wd-your-last-name"
+        placeholder="Your last name"
+        defaultValue="Li"
+      />
       <br />
       <label htmlFor="wd-your-student-id">Student ID:</label>
-      <input id="wd-your-student-id" placeholder="Your Student ID" />
+      <input id="wd-your-student-id" placeholder="Sample ID, e.g. 001234567" />
+      <br />
+      <label htmlFor="wd-your-password">Password:</label>
+      <input
+        type="password"
+        id="wd-your-password"
+        placeholder="Sample password"
+      />
       <br />
 
       {/* Textarea */}
@@ -26,18 +41,14 @@ export default function YourForm() {
       <br />
       <textarea
         id="wd-your-bio"
-        placeholder="Write a short bio about yourself"
-        cols={30}
+        cols={40}
         rows={5}
-        defaultValue="I am a student at Northeastern University studying Computer Science. I enjoy learning about web development and building interactive applications."
+        defaultValue="I am a graduate student in computer science at Northeastern University. I come from an English and linguistics background, and I am learning to build full-stack web applications."
       />
       <br />
 
       {/* Radio buttons */}
       <label>Class standing:</label>
-      <br />
-      <input type="radio" name="your-standing" id="wd-your-graduate" />
-      <label htmlFor="wd-your-graduate">Graduate</label>
       <br />
       <input type="radio" name="your-standing" id="wd-your-freshman" />
       <label htmlFor="wd-your-freshman">Freshman</label>
@@ -51,10 +62,23 @@ export default function YourForm() {
       <input type="radio" name="your-standing" id="wd-your-senior" />
       <label htmlFor="wd-your-senior">Senior</label>
       <br />
-
-      <label>Student Status:</label>
+      <input
+        type="radio"
+        name="your-standing"
+        id="wd-your-graduate"
+        defaultChecked
+      />
+      <label htmlFor="wd-your-graduate">Graduate</label>
       <br />
-      <input type="radio" name="your-status" id="wd-your-full-time" />
+
+      <label>Student status:</label>
+      <br />
+      <input
+        type="radio"
+        name="your-status"
+        id="wd-your-full-time"
+        defaultChecked
+      />
       <label htmlFor="wd-your-full-time">Full-time</label>
       <br />
       <input type="radio" name="your-status" id="wd-your-part-time" />
@@ -68,6 +92,7 @@ export default function YourForm() {
         type="checkbox"
         name="your-interests"
         id="wd-your-interest-coding"
+        defaultChecked
       />
       <label htmlFor="wd-your-interest-coding">Coding</label>
       <br />
@@ -82,6 +107,7 @@ export default function YourForm() {
         type="checkbox"
         name="your-interests"
         id="wd-your-interest-research"
+        defaultChecked
       />
       <label htmlFor="wd-your-interest-research">Research</label>
       <br />
@@ -106,14 +132,14 @@ export default function YourForm() {
       <br />
 
       {/* Typed fields */}
-      <label htmlFor="wd-your-email">Email:</label>
+      <label htmlFor="wd-your-email">Email: </label>
       <input
         type="email"
         id="wd-your-email"
         placeholder="you@northeastern.edu"
       />
       <br />
-      <label htmlFor="wd-your-graduation-year">Graduation Year:</label>
+      <label htmlFor="wd-your-graduation-year">Graduation year: </label>
       <input
         type="number"
         id="wd-your-graduation-year"
@@ -122,7 +148,7 @@ export default function YourForm() {
         max="2030"
       />
       <br />
-      <label htmlFor="wd-your-birthday">Birthday:</label>
+      <label htmlFor="wd-your-birthday">Birthday: </label>
       <input
         type="date"
         id="wd-your-birthday"
@@ -131,11 +157,13 @@ export default function YourForm() {
         max="2025-12-31"
       />
       <br />
-      <label htmlFor="wd-your-excitement-level">Excitement Level:</label>
+      <label htmlFor="wd-your-excitement-level">
+        Excitement level (0 to 10):{" "}
+      </label>
       <input
         type="range"
         id="wd-your-excitement-level"
-        defaultValue="5"
+        defaultValue="8"
         min="0"
         max="10"
       />
