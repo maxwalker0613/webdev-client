@@ -6,6 +6,7 @@ import Images from "./Images";
 import Forms from "./forms/Forms";
 import HighlightedParagraph from "./HighlightedParagraph";
 import HighlightedBoxLab from "./HighlightedBox";
+import AnchorTag from "./AnchorTag";
 
 export default function Lab1() {
   return (
@@ -20,6 +21,7 @@ export default function Lab1() {
       <Forms />
       <HighlightedParagraph />
       <HighlightedBoxLab />
+      <AnchorTag />
       {/* do the next exercise here */}
     </div>
   );
