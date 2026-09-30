@@ -26,13 +26,13 @@ export default function YourForm() {
       />
       <br />
       <label htmlFor="wd-your-student-id">Student ID:</label>
-      <input id="wd-your-student-id" placeholder="Sample ID, e.g. 001234567" />
+      <input id="wd-your-student-id" placeholder="Your student ID" />
       <br />
       <label htmlFor="wd-your-password">Password:</label>
       <input
         type="password"
         id="wd-your-password"
-        placeholder="Sample password"
+        placeholder="Your password"
       />
       <br />
 
