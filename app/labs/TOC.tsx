@@ -41,7 +41,7 @@ export default function TOC() {
           </Link>
         </li>
         <li>
-          <Link href="/account/signin">Kambaz</Link>
+          <Link href="/">Kambaz</Link>
         </li>
       </ul>
     </div>

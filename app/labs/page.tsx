@@ -23,7 +23,7 @@ export default function Labs() {
           <Link href="/labs/lab5">Lab 5: Express REST APIs</Link>
         </li>
         <li>
-          <Link href="/account/signin">Kambaz</Link>
+          <Link href="/">Kambaz</Link>
         </li>
       </ul>
     </div>
