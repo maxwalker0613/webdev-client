@@ -32,7 +32,11 @@ export default function TOC() {
           <Link href="/labs/lab5">Lab 5</Link>
         </li>
         <li>
-          <Link href="/book/ch1" id="wd-toc-book-link">
+          <Link
+            href="/book/ch1"
+            id="wd-toc-book-link"
+            style={{ whiteSpace: "nowrap" }}
+          >
             Chapter 1
           </Link>
         </li>
