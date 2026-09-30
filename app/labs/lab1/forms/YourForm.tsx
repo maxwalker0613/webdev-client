@@ -1,0 +1,153 @@
+"use client";
+
+export default function YourForm() {
+  return (
+    <form
+      id="wd-your-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
+      <h4>Student Profile</h4>
+
+      {/* Text fields */}
+      <label htmlFor="wd-your-first-name">First Name:</label>
+      <input id="wd-your-first-name" placeholder="Your First Name" />
+      <br />
+      <label htmlFor="wd-your-last-name">Last Name:</label>
+      <input id="wd-your-last-name" placeholder="Your Last Name" />
+      <br />
+      <label htmlFor="wd-your-student-id">Student ID:</label>
+      <input id="wd-your-student-id" placeholder="Your Student ID" />
+      <br />
+
+      {/* Textarea */}
+      <label htmlFor="wd-your-bio">Bio:</label>
+      <br />
+      <textarea
+        id="wd-your-bio"
+        placeholder="Write a short bio about yourself"
+        cols={30}
+        rows={5}
+        defaultValue="I am a student at Northeastern University studying Computer Science. I enjoy learning about web development and building interactive applications."
+      />
+      <br />
+
+      {/* Radio buttons */}
+      <label>Class standing:</label>
+      <br />
+      <input type="radio" name="your-standing" id="wd-your-graduate" />
+      <label htmlFor="wd-your-graduate">Graduate</label>
+      <br />
+      <input type="radio" name="your-standing" id="wd-your-freshman" />
+      <label htmlFor="wd-your-freshman">Freshman</label>
+      <br />
+      <input type="radio" name="your-standing" id="wd-your-sophomore" />
+      <label htmlFor="wd-your-sophomore">Sophomore</label>
+      <br />
+      <input type="radio" name="your-standing" id="wd-your-junior" />
+      <label htmlFor="wd-your-junior">Junior</label>
+      <br />
+      <input type="radio" name="your-standing" id="wd-your-senior" />
+      <label htmlFor="wd-your-senior">Senior</label>
+      <br />
+
+      <label>Student Status:</label>
+      <br />
+      <input type="radio" name="your-status" id="wd-your-full-time" />
+      <label htmlFor="wd-your-full-time">Full-time</label>
+      <br />
+      <input type="radio" name="your-status" id="wd-your-part-time" />
+      <label htmlFor="wd-your-part-time">Part-time</label>
+      <br />
+
+      {/* Checkboxes */}
+      <label>Interests:</label>
+      <br />
+      <input
+        type="checkbox"
+        name="your-interests"
+        id="wd-your-interest-coding"
+      />
+      <label htmlFor="wd-your-interest-coding">Coding</label>
+      <br />
+      <input
+        type="checkbox"
+        name="your-interests"
+        id="wd-your-interest-design"
+      />
+      <label htmlFor="wd-your-interest-design">Design</label>
+      <br />
+      <input
+        type="checkbox"
+        name="your-interests"
+        id="wd-your-interest-research"
+      />
+      <label htmlFor="wd-your-interest-research">Research</label>
+      <br />
+
+      {/* Dropdowns */}
+      <label htmlFor="wd-your-major">Major: </label>
+      <select id="wd-your-major" defaultValue="CS">
+        <option value="CS">Computer Science</option>
+        <option value="DS">Data Science</option>
+        <option value="SE">Software Engineering</option>
+        <option value="IS">Information Systems</option>
+      </select>
+      <br />
+      <label htmlFor="wd-your-topics">Topics to deepen: </label>
+      <br />
+      <select multiple id="wd-your-topics" defaultValue={["REACT", "NODE"]}>
+        <option value="REACT">React</option>
+        <option value="NODE">Node.js</option>
+        <option value="PYTHON">Python</option>
+        <option value="JAVASCRIPT">JavaScript</option>
+      </select>
+      <br />
+
+      {/* Typed fields */}
+      <label htmlFor="wd-your-email">Email:</label>
+      <input
+        type="email"
+        id="wd-your-email"
+        placeholder="you@northeastern.edu"
+      />
+      <br />
+      <label htmlFor="wd-your-graduation-year">Graduation Year:</label>
+      <input
+        type="number"
+        id="wd-your-graduation-year"
+        placeholder="2028"
+        min="2026"
+        max="2030"
+      />
+      <br />
+      <label htmlFor="wd-your-birthday">Birthday:</label>
+      <input
+        type="date"
+        id="wd-your-birthday"
+        defaultValue="2000-01-01"
+        min="1900-01-01"
+        max="2025-12-31"
+      />
+      <br />
+      <label htmlFor="wd-your-excitement-level">Excitement Level:</label>
+      <input
+        type="range"
+        id="wd-your-excitement-level"
+        defaultValue="5"
+        min="0"
+        max="10"
+      />
+      <br />
+
+      {/* Buttons */}
+      <button id="wd-your-save" type="submit">
+        Save
+      </button>
+      <button id="wd-your-cancel" type="button">
+        Cancel
+      </button>
+    </form>
+  );
+}
