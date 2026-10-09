@@ -13,6 +13,7 @@ import Zindex from "./Zindex";
 import Float from "./Float";
 import GridLayout from "./GridLayout";
 import Flex from "./Flex";
+import MediaQueriesDemo from "./MediaQueriesDemo";
 
 export default function Lab2() {
   return (
@@ -143,6 +144,7 @@ export default function Lab2() {
       <Float />
       <GridLayout />
       <Flex />
+      <MediaQueriesDemo />
     </div>
   );
 }
