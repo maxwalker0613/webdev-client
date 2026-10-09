@@ -237,3 +237,26 @@ p#wd-ai-cascade {
   /* border-box keeps the declared width */
   box-sizing: border-box;
 }
+
+/* 2.1.11 */
+.wd-rounded-corners-top {
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+.wd-rounded-corners-bottom {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+.wd-rounded-corners-all-around {
+  border-radius: 50px;
+}
+.wd-rounded-corners-inline {
+  border-radius: 30px 0px 20px 50px;
+}
+.wd-ai-rounded-left {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+.wd-my-rounded-corners {
+  border-radius: 60px 0px 60px 0px;
+}
