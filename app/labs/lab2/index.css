@@ -63,7 +63,7 @@ p#wd-id-selector-3 {
 }
 
 /* Cascade experiment: tag (green) < class < id, so the id rule wins */
-p {
+:where(#wd-css-cascade) p {
   background-color: green;
 }
 
@@ -81,4 +81,21 @@ p#wd-my-cascade {
 
 p#wd-ai-cascade {
   background-color: red;
+}
+
+/* 2.1.7 start */
+.wd-fg-color-black {
+  color: black;
+}
+.wd-fg-color-white {
+  color: white;
+}
+.wd-fg-color-blue {
+  color: #7070ff;
+}
+.wd-fg-color-red {
+  color: #ff7070;
+}
+.wd-fg-color-green {
+  color: green;
 }
