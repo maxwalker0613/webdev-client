@@ -306,3 +306,28 @@ p#wd-ai-cascade {
   display: inline;
   width: 150px;
 }
+
+/* 2.1.13 */
+.wd-pos-relative-nudge-up-right {
+  position: relative;
+  bottom: 30px;
+  left: 30px;
+}
+.wd-pos-relative-nudge-down-right {
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+.wd-pos-relative {
+  position: relative;
+}
+.wd-ai-pos-relative-nudge {
+  position: relative;
+  top: 15px;
+  right: 25px;
+}
+.wd-my-pos-relative-nudge {
+  position: relative;
+  top: 10px;
+  left: 80px;
+}
