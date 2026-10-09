@@ -331,3 +331,30 @@ p#wd-ai-cascade {
   top: 10px;
   left: 80px;
 }
+
+/* 2.1.14 */
+.wd-pos-absolute-10-10 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.wd-pos-absolute-50-50 {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+.wd-pos-absolute-120-20 {
+  position: absolute;
+  top: 20px;
+  left: 120px;
+}
+.wd-my-pos-absolute-tr {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.wd-ai-pos-absolute-br {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
