@@ -10,6 +10,7 @@ import Dimensions from "./Dimensions";
 import Display from "./Display";
 import Positions from "./Positions";
 import Zindex from "./Zindex";
+import Float from "./Float";
 
 export default function Lab2() {
   return (
@@ -137,6 +138,7 @@ export default function Lab2() {
       <Display />
       <Positions />
       <Zindex />
+      <Float />
     </div>
   );
 }

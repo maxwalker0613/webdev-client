@@ -79,7 +79,7 @@ export default function Positions() {
           id="wd-my-fixed"
           className="wd-my-pos-fixed wd-dimension-square wd-bg-color-green wd-fg-color-white"
         >
-          On my own part: My badge
+          My badge
         </div>
       </div>
     </div>

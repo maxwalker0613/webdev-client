@@ -392,3 +392,27 @@ p#wd-ai-cascade {
   top: 80px;
   left: 80px;
 }
+
+/* 2.1.17 */
+.wd-float-left {
+  float: left;
+  height: 100px;
+}
+.wd-float-right {
+  float: right;
+  height: 100px;
+}
+img.wd-float-left,
+img.wd-float-right {
+  width: auto;
+  max-width: 35%;
+}
+img.wd-float-left {
+  margin: 0 1rem 0.5rem 0;
+}
+img.wd-float-right {
+  margin: 0 0 0.5rem 1rem;
+}
+.wd-float-done {
+  clear: both;
+}
