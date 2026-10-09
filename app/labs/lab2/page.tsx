@@ -102,6 +102,18 @@ export default function Lab2() {
           </div>
         </div>
       </div>
+
+      <div id="wd-css-cascade">
+        <h3>CSS selection rule mechanism</h3>
+        <p id="wd-my-cascade" className="wd-my-cascade-class">
+          On my own part: this paragraph matches a tag rule (green), a class
+          rule (orange), and an ID rule (grey). The ID rule wins.
+        </p>
+        <p id="wd-ai-cascade" className="wd-ai-cascade">
+          Sample paragraph: tag rule green, class rule yellow, ID rule red. The
+          ID rule wins.
+        </p>
+      </div>
     </div>
   );
 }

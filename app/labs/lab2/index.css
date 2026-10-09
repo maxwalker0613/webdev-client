@@ -61,3 +61,24 @@ p#wd-id-selector-3 {
   background-color: lightblue;
   color: black;
 }
+
+/* Cascade experiment: tag (green) < class < id, so the id rule wins */
+p {
+  background-color: green;
+}
+
+.wd-my-cascade-class {
+  background-color: orange;
+}
+
+.wd-ai-cascade {
+  background-color: yellow;
+}
+
+p#wd-my-cascade {
+  background-color: grey;
+}
+
+p#wd-ai-cascade {
+  background-color: red;
+}
