@@ -41,6 +41,7 @@ export default function GridLayout() {
           <h3>Third 3</h3>
         </div>
       </div>
+      <div className="wd-float-done" />
     </div>
   );
 }

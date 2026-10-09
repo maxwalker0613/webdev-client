@@ -68,7 +68,7 @@
   }
 }
 
-@media (min-width: 1250px) {
+@media (min-width: 1250px) and (max-width: 1599px) {
   .wd-media-queries-demo {
     background-color: red;
     color: white;
