@@ -29,3 +29,18 @@ p#wd-id-selector-3 {
   background-color: orange;
   color: blue;
 }
+
+.wd-class-selector {
+  background-color: yellow;
+  color: blue;
+}
+
+.wd-ai-class-selector {
+  background-color: maroon;
+  color: white;
+}
+
+.wd-your-class {
+  background-color: lightgray;
+  color: darkgreen;
+}
