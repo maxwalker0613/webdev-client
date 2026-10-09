@@ -52,6 +52,35 @@ export default function Positions() {
             Bottom right
           </div>
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+
+      <div id="wd-css-position-fixed">
+        <h2>Fixed position</h2>
+        Checkout the blue square that says &quot;Fixed position&quot; stuck all
+        the way on the right and half way down the page. It doesn&apos;t scroll
+        with the rest of the page. Its position is &quot;Fixed&quot;.
+        <div className="wd-pos-fixed wd-dimension-square wd-bg-color-blue wd-fg-color-white">
+          Fixed position
+        </div>
+        <div
+          id="wd-ai-fixed"
+          className="wd-ai-pos-fixed wd-bg-color-red wd-fg-color-white"
+        >
+          AI fixed
+        </div>
+        <div
+          id="wd-my-fixed"
+          className="wd-my-pos-fixed wd-dimension-square wd-bg-color-green wd-fg-color-white"
+        >
+          On my own part: My badge
+        </div>
       </div>
     </div>
   );

@@ -358,3 +358,20 @@ p#wd-ai-cascade {
   right: 10px;
   bottom: 10px;
 }
+
+/* 2.1.15 */
+.wd-pos-fixed {
+  position: fixed;
+  right: 0px;
+  bottom: 50%;
+}
+.wd-my-pos-fixed {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}
+.wd-ai-pos-fixed {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
