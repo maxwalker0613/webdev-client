@@ -1,6 +1,7 @@
 import "./index.css";
 import TailwindSpacing from "./TailwindSpacing";
 import TailwindTypography from "./TailwindTypography";
+import TailwindBackgroundColors from "./TailwindBackgroundColors";
 
 export default function TailwindLab() {
   return (
@@ -9,6 +10,8 @@ export default function TailwindLab() {
       <TailwindSpacing />
       <hr className="my-8" />
       <TailwindTypography />
+      <hr className="my-8" />
+      <TailwindBackgroundColors />
     </div>
   );
 }
