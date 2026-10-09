@@ -260,3 +260,49 @@ p#wd-ai-cascade {
 .wd-my-rounded-corners {
   border-radius: 60px 0px 60px 0px;
 }
+
+/* 2.1.12 */
+.wd-dimension-portrait {
+  width: 75px;
+  height: 100px;
+}
+.wd-dimension-landscape {
+  width: 100px;
+  height: 75px;
+}
+.wd-dimension-square {
+  width: 75px;
+  height: 75px;
+}
+.wd-ai-dimension {
+  width: 120px;
+  height: 60px;
+  background-color: yellow;
+}
+.wd-my-dimension {
+  width: 150px;
+  height: 100px;
+}
+
+.wd-display-inline {
+  display: inline;
+  width: 150px;
+  height: 50px;
+  padding: 5px;
+}
+.wd-display-inline-block {
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  padding: 5px;
+}
+.wd-display-block {
+  display: block;
+  width: 150px;
+  height: 50px;
+  padding: 5px;
+}
+.wd-my-inline-div {
+  display: inline;
+  width: 150px;
+}
