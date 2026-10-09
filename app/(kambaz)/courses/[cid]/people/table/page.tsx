@@ -104,7 +104,7 @@ export default function PeopleTable() {
           {people.map((p) => (
             <tr key={p.login} className="odd:bg-neutral-50">
               <td className="p-2 text-nowrap">
-                <FaUserCircle className="me-2 inline text-4xl text-neutral-400" />
+                <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-400" />
                 {p.name}
               </td>
               <td className="p-2">{p.login}</td>
