@@ -63,12 +63,44 @@ export default function Lab2() {
 
       <div id="wd-your-class">
         <p className="wd-your-class">
-          This paragraph is styled by "your class" with a lightgrey background
-          and darkgreen text
+          This paragraph is styled by &quot;your class&quot; with a lightgrey
+          background and darkgreen text
         </p>
         <h4 className="wd-your-class">
           This heading has same style as paragraph above
         </h4>
+      </div>
+
+      <div id="wd-css-document-structure">
+        <div className="wd-selector-1">
+          <h3>Document structure selectors</h3>
+          <div className="wd-selector-2">
+            Selectors can be combined to refer elements in particular places in
+            the document
+            <p className="wd-selector-3">
+              This paragraph&apos;s red background is referenced as
+              <br />
+              .selector-2 .selector3
+              <br />
+              meaning the descendant of some ancestor.
+              <br />
+              <span className="wd-selector-4">
+                Whereas this span is a direct child of its parent
+              </span>
+              <br />
+              <span className="wd-ai-selector-5">
+                This span is a descendant of .wd-selector-1
+              </span>
+              <br />
+              You can combine these relationships to create specific styles
+              depending on the document structure
+            </p>
+            <p className="wd-my-selector">
+              On my own part: a paragraph that is a direct child of
+              wd-selector-2
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
