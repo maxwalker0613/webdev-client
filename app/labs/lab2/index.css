@@ -3,12 +3,12 @@
   color: white;
 } */
 
-h2 {
+:where(#wd-lab2) h2 {
   background-color: navy;
   color: white;
 }
 
-h3 {
+:where(#wd-lab2) h3 {
   background-color: purple;
   color: yellow;
 }
