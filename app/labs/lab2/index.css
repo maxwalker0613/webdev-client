@@ -1,7 +1,7 @@
-p {
+/* p {
   background-color: green;
   color: white;
-}
+} */
 
 h2 {
   background-color: navy;
@@ -11,4 +11,21 @@ h2 {
 h3 {
   background-color: purple;
   color: yellow;
+}
+
+p#wd-id-selector-1 {
+  background-color: red;
+  color: white;
+}
+p#wd-id-selector-2 {
+  background-color: yellow;
+  color: black;
+}
+p#wd-ai-id-selector {
+  background-color: teal;
+  color: white;
+}
+p#wd-id-selector-3 {
+  background-color: orange;
+  color: blue;
 }
