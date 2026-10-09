@@ -83,7 +83,7 @@ p#wd-ai-cascade {
   background-color: red;
 }
 
-/* 2.1.7 start */
+/* 2.1.7 */
 .wd-fg-color-black {
   color: black;
 }
@@ -98,4 +98,21 @@ p#wd-ai-cascade {
 }
 .wd-fg-color-green {
   color: green;
+}
+
+/* 2.1.8 */
+.wd-bg-color-yellow {
+  background-color: #ffff07;
+}
+.wd-bg-color-blue {
+  background-color: #7070ff;
+}
+.wd-bg-color-red {
+  background-color: #ff7070;
+}
+.wd-bg-color-green {
+  background-color: green;
+}
+.wd-bg-color-gray {
+  background-color: lightgray;
 }
