@@ -1,4 +1,5 @@
 import Link from "next/link";
+import * as db from "../../../../database";
 
 const input =
   "w-full rounded border border-neutral-300 bg-white px-3 py-1.5 text-sm";
@@ -22,7 +23,8 @@ export default async function AssignmentEditor({
 }: {
   params: Promise<{ cid: string; aid: string }>;
 }) {
-  const { cid } = await params;
+  const { cid, aid } = await params;
+  const assignment = db.assignments.find((a) => a._id === aid);
   return (
     <div id="wd-assignments-editor" className="max-w-3xl">
       <label htmlFor="wd-name" className={fieldLabel}>
@@ -30,13 +32,14 @@ export default async function AssignmentEditor({
       </label>
       <input
         id="wd-name"
-        defaultValue="A1 - ENV + HTML"
+        defaultValue={assignment?.title ?? ""}
         className={`${input} mb-4`}
       />
+      <div className="mb-4 text-sm text-neutral-600">Assignment id: {aid}</div>
       <textarea
         id="wd-description"
         rows={6}
-        defaultValue="The assignment is available online. Submit a link to the landing page of your web application."
+        defaultValue={assignment?.description ?? ""}
         className={`${input} mb-4`}
       />
 
@@ -44,7 +47,11 @@ export default async function AssignmentEditor({
         <label htmlFor="wd-points" className={rowLabel}>
           Points
         </label>
-        <input id="wd-points" defaultValue={100} className={input} />
+        <input
+          id="wd-points"
+          defaultValue={assignment?.points ?? ""}
+          className={input}
+        />
       </div>
 
       <div className={row}>
@@ -121,7 +128,7 @@ export default async function AssignmentEditor({
           <input
             id="wd-due-date"
             type="date"
-            defaultValue="2024-05-13"
+            defaultValue={assignment?.due}
             className={`${input} mb-3`}
           />
           <div className="flex gap-3">
@@ -132,7 +139,7 @@ export default async function AssignmentEditor({
               <input
                 id="wd-available-from"
                 type="date"
-                defaultValue="2024-05-06"
+                defaultValue={assignment?.available}
                 className={input}
               />
             </div>
