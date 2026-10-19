@@ -11,13 +11,60 @@ const tileBase = "block py-3 text-center text-sm no-underline";
 const idle = `${tileBase} bg-black text-white`;
 const active = `${tileBase} bg-white text-red-600`;
 
+const LINKS = [
+  {
+    label: "Dashboard",
+    path: "/dashboard",
+    id: "wd-dashboard-link",
+    icon: AiOutlineDashboard,
+    match: (p: string) => p.startsWith("/dashboard"),
+  },
+  {
+    label: "Courses",
+    path: "/dashboard",
+    id: "wd-course-link",
+    icon: FaBook,
+    match: (p: string) => p.startsWith("/courses"),
+  },
+  {
+    label: "Calendar",
+    path: "/calendar",
+    id: "wd-calendar-link",
+    icon: FaRegCalendarDays,
+    match: (p: string) => p.startsWith("/calendar"),
+  },
+  {
+    label: "Inbox",
+    path: "/inbox",
+    id: "wd-inbox-link",
+    icon: FaInbox,
+    match: (p: string) => p.startsWith("/inbox"),
+  },
+  {
+    label: "Labs",
+    path: "/labs",
+    id: "wd-labs-link",
+    icon: FaFlask,
+    match: (p: string) => p.startsWith("/labs"),
+  },
+  {
+    label: "History",
+    path: "/history",
+    id: "wd-history-link",
+    icon: FaRegCalendarDays,
+    match: (p: string) => p.startsWith("/history"),
+  },
+  {
+    label: "Help",
+    path: "/labs",
+    id: "wd-ai-nav-help",
+    icon: FaCircleQuestion,
+    match: () => false,
+  },
+];
+
 export default function KambazNavigation() {
   const pathname = usePathname() ?? "";
-  const onDashboard = pathname.startsWith("/dashboard");
-  const onCourses = pathname.startsWith("/courses");
-  const onCalendar = pathname.startsWith("/calendar");
-  const onInbox = pathname.startsWith("/inbox");
-  const onLabs = pathname.startsWith("/labs");
   const onAccount = pathname.startsWith("/account");
 
   return (
@@ -53,52 +100,21 @@ export default function KambazNavigation() {
         <br />
         Account
       </Link>
-      <Link
-        href="/dashboard"
-        id="wd-dashboard-link"
-        className={onDashboard ? active : idle}
-      >
-        <AiOutlineDashboard className="inline-block text-3xl text-red-600" />
-        <br />
-        Dashboard
-      </Link>
-      <Link
-        href="/dashboard"
-        id="wd-course-link"
-        className={onCourses ? active : idle}
-      >
-        <FaBook className="inline-block text-3xl text-red-600" />
-        <br />
-        Courses
-      </Link>
-      <Link
-        href="/calendar"
-        id="wd-calendar-link"
-        className={onCalendar ? active : idle}
-      >
-        <FaRegCalendarDays className="inline-block text-3xl text-red-600" />
-        <br />
-        Calendar
-      </Link>
-      <Link
-        href="/inbox"
-        id="wd-inbox-link"
-        className={onInbox ? active : idle}
-      >
-        <FaInbox className="inline-block text-3xl text-red-600" />
-        <br />
-        Inbox
-      </Link>
-      <Link href="/labs" id="wd-labs-link" className={onLabs ? active : idle}>
-        <FaFlask className="inline-block text-3xl text-red-600" />
-        <br />
-        Labs
-      </Link>
-      <Link href="/labs" id="wd-ai-nav-help" className={idle}>
-        <FaCircleQuestion className="inline-block text-3xl text-red-600" />
-        <br />
-        Help
-      </Link>
+      {LINKS.map((link) => {
+        const Icon = link.icon;
+        return (
+          <Link
+            key={link.label}
+            href={link.path}
+            id={link.id}
+            className={link.match(pathname) ? active : idle}
+          >
+            <Icon className="inline-block text-3xl text-red-600" />
+            <br />
+            {link.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }
