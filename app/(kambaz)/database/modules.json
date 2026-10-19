@@ -238,5 +238,25 @@
         "module": "M303"
       }
     ]
+  },
+  {
+    "_id": "M401",
+    "name": "Week 1, Introduction to Web Development",
+    "description": "Course introduction, tooling, and the first Kambaz screens.",
+    "course": "CS5610",
+    "lessons": [
+      {
+        "_id": "L601",
+        "name": "Environment Setup",
+        "description": "Install Node.js, create the Next.js project, and deploy to Vercel.",
+        "module": "M401"
+      },
+      {
+        "_id": "L602",
+        "name": "HTML and CSS Basics",
+        "description": "Build the first Kambaz pages with HTML and Tailwind.",
+        "module": "M401"
+      }
+    ]
   }
 ]

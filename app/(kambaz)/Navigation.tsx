@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaRegCircleUser, FaRegCalendarDays } from "react-icons/fa6";
-import { FaInbox, FaBook, FaFlask, FaCircleQuestion } from "react-icons/fa6";
+import { FaInbox, FaBook, FaFlask } from "react-icons/fa6";
 import Image from "next/image";
 
 const tileBase = "block py-3 text-center text-sm no-underline";
@@ -53,13 +53,6 @@ const LINKS = [
     id: "wd-history-link",
     icon: FaRegCalendarDays,
     match: (p: string) => p.startsWith("/history"),
-  },
-  {
-    label: "Help",
-    path: "/labs",
-    id: "wd-ai-nav-help",
-    icon: FaCircleQuestion,
-    match: () => false,
   },
 ];
 

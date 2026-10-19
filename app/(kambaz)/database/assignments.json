@@ -88,5 +88,14 @@
     "points": 100,
     "due": "2024-05-27",
     "available": "2024-05-20"
+  },
+  {
+    "_id": "A401",
+    "title": "A1",
+    "course": "CS5610",
+    "description": "Create the landing page and deploy the project to Vercel.",
+    "points": 100,
+    "due": "2026-09-27",
+    "available": "2026-09-13"
   }
 ]
