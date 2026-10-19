@@ -14,7 +14,7 @@ export default function ArrayIndexAndLength() {
       <br />
       index1 = {index1}
       <br />
-      indexOf(9) = {indexOf9}
+      indexOf9 = {indexOf9}
       <br />
       indexOf1 = {indexOf1}
       <hr />
