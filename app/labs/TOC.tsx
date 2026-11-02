@@ -32,7 +32,7 @@ const LINKS = [
     href: "/labs/lab4",
     id: "wd-toc-lab4-link",
     label: "Lab 4",
-    match: () => false,
+    match: (p: string) => p.startsWith("/labs/lab4"),
   },
   {
     href: "/labs/lab5",
@@ -47,9 +47,9 @@ const LINKS = [
     match: () => false,
   },
   {
-    href: "https://kambaz.dev/book/ch3",
-    id: "wd-book-ch3-link",
-    label: "Book Ch3",
+    href: "https://kambaz.dev/book/ch4",
+    id: "wd-book-ch4-link",
+    label: "Book Ch4",
     match: () => false,
   },
   {

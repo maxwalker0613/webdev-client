@@ -1,3 +1,34 @@
+"use client";
+
+import ClickEvent from "./ClickEvent";
+import PassingDataOnEvent from "./PassingDataOnEvent";
+import PassingFunctions from "./PassingFunctions";
+import CounterBroken from "./CounterBroken";
+import Counter from "./Counter";
+
 export default function Lab4() {
-  return <h2 id="wd-lab4-heading">Lab 4</h2>;
+  const sayHello = (message: string) => {
+    alert(message);
+  };
+  const sayName = () => {
+    alert("Hello from Yuxin Li");
+  };
+  const sampleFromParent = () => {
+    alert("Sample from parent");
+  };
+  return (
+    <div id="wd-lab4">
+      <h2>Lab 4</h2>
+      <ClickEvent />
+      <PassingDataOnEvent />
+      <PassingFunctions
+        message="Hello from Lab 4"
+        theFunction={sayHello}
+        nameFunction={sayName}
+        theOtherFunction={sampleFromParent}
+      />
+      <CounterBroken />
+      <Counter />
+    </div>
+  );
 }
