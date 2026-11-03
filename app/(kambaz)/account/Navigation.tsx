@@ -2,15 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAccountContext } from "./AccountContext";
 
-const links = [
-  { id: "wd-account-signin-link", label: "Signin", href: "/account/signin" },
+const allLinks = [
+  { id: "wd-account-signin-link", label: "Signin", href: "/account" },
   { id: "wd-account-signup-link", label: "Signup", href: "/account/signup" },
   { id: "wd-account-profile-link", label: "Profile", href: "/account/profile" },
 ];
 
 export default function AccountNavigation() {
   const pathname = usePathname() ?? "";
+  const { currentUser } = useAccountContext();
+  const links = allLinks.filter((link) =>
+    currentUser
+      ? link.id === "wd-account-profile-link"
+      : link.id !== "wd-account-profile-link",
+  );
   return (
     <div
       id="wd-account-navigation"
