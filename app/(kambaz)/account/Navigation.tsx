@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useAccountContext } from "./AccountContext";
 
 const allLinks = [
-  { id: "wd-account-signin-link", label: "Signin", href: "/account" },
+  { id: "wd-account-signin-link", label: "Signin", href: "/account/signin" },
   { id: "wd-account-signup-link", label: "Signup", href: "/account/signup" },
   { id: "wd-account-profile-link", label: "Profile", href: "/account/profile" },
 ];
