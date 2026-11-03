@@ -14,6 +14,7 @@ import ParentStateComponent from "./ParentStateComponent";
 import PropDrilling from "./PropDrilling";
 import UrlEncoding from "./UrlEncoding";
 import ZustandExamples from "./zustand/ZustandExamples";
+import ReduxExamples from "./redux/ReduxExamples";
 
 export default function Lab4() {
   const sayHello = (message: string) => {
@@ -47,6 +48,7 @@ export default function Lab4() {
       <PropDrilling />
       <UrlEncoding />
       <ZustandExamples />
+      <ReduxExamples />
     </div>
   );
 }

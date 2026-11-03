@@ -1,0 +1,36 @@
+import type { ReduxTodo } from "./todosReducer";
+
+export default function ReduxTodoItem({
+  todo,
+  onEdit,
+  onDelete,
+}: {
+  todo: ReduxTodo;
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
+  return (
+    <li
+      id={`wd-redux-todo-${todo.id}`}
+      className="mb-1 flex items-center justify-between rounded border border-neutral-300 px-3 py-1"
+    >
+      <span>{todo.title}</span>
+      <span className="flex gap-2">
+        <button
+          type="button"
+          className="rounded bg-yellow-400 px-2 py-0.5 text-sm font-medium"
+          onClick={onEdit}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          className="rounded bg-red-600 px-2 py-0.5 text-sm font-medium text-white"
+          onClick={onDelete}
+        >
+          Delete
+        </button>
+      </span>
+    </li>
+  );
+}
