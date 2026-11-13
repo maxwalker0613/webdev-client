@@ -38,7 +38,7 @@ const LINKS = [
     href: "/labs/lab5",
     id: "wd-toc-lab5-link",
     label: "Lab 5",
-    match: () => false,
+    match: (p: string) => p.startsWith("/labs/lab5"),
   },
   {
     href: "/book/ch1",
@@ -47,9 +47,15 @@ const LINKS = [
     match: () => false,
   },
   {
-    href: "https://kambaz.dev/book/ch4",
-    id: "wd-book-ch4-link",
-    label: "Book Ch4",
+    href: "https://kambaz.dev/book/ch5",
+    id: "wd-book-ch5-link",
+    label: "Book Ch5",
+    match: () => false,
+  },
+  {
+    href: "https://github.com/maxwalker0613/webdev-server",
+    id: "wd-toc-node-github",
+    label: "Node GitHub",
     match: () => false,
   },
   {
