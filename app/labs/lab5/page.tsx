@@ -5,6 +5,7 @@ import WorkingWithRemoteObjects from "./WorkingWithRemoteObjects";
 import WorkingWithRemoteArrays from "./WorkingWithRemoteArrays";
 import HttpClient from "./HttpClient";
 import WorkingWithRemoteObjectsAsynchronously from "./WorkingWithRemoteObjectsAsynchronously";
+import WorkingWithRemoteArraysAsynchronously from "./WorkingWithRemoteArraysAsynchronously";
 
 export default function Lab5() {
   return (
@@ -17,6 +18,7 @@ export default function Lab5() {
       <WorkingWithRemoteArrays />
       <HttpClient />
       <WorkingWithRemoteObjectsAsynchronously />
+      <WorkingWithRemoteArraysAsynchronously />
     </div>
   );
 }
