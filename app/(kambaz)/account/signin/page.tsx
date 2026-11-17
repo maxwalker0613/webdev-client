@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import * as db from "../../database";
 import { useAccountContext } from "../AccountContext";
+import * as client from "../client";
 
 const field = "mb-2 w-full rounded border border-neutral-300 px-3 py-2";
 
@@ -13,23 +13,33 @@ export default function Signin() {
     username: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const { setCurrentUser } = useAccountContext();
   const router = useRouter();
 
-  const signin = () => {
-    const user = db.users.find(
-      (u) =>
-        u.username === credentials.username &&
-        u.password === credentials.password,
-    );
-    if (!user) return;
-    setCurrentUser(user);
-    router.push("/dashboard");
+  const signin = async () => {
+    try {
+      const user = await client.signin(credentials);
+      if (!user) return;
+      setCurrentUser(user);
+      router.push("/dashboard");
+    } catch (error) {
+      const e = error as { response?: { data?: { message?: string } } };
+      setErrorMessage(e.response?.data?.message ?? "Unable to sign in");
+    }
   };
 
   return (
     <div id="wd-signin-screen" className="max-w-sm">
       <h1 className="mb-3 text-2xl font-semibold">Sign in</h1>
+      {errorMessage && (
+        <p
+          id="wd-signin-error"
+          className="mb-2 rounded bg-red-100 px-3 py-2 text-red-800"
+        >
+          {errorMessage}
+        </p>
+      )}
       <input
         placeholder="username"
         id="wd-username"

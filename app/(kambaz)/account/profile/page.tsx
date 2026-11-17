@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAccountContext, type User } from "../AccountContext";
+import * as client from "../client";
 
 const field = "mb-2 w-full rounded border border-neutral-300 px-3 py-2";
 
@@ -10,18 +11,26 @@ type ProfileData = User & { dob?: string };
 
 export default function Profile() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  const { currentUser, setCurrentUser } = useAccountContext();
+  const { currentUser, setCurrentUser, loaded } = useAccountContext();
   const router = useRouter();
 
   useEffect(() => {
+    if (!loaded) return;
     if (!currentUser) {
       router.push("/account/signin");
       return;
     }
     setProfile({ dob: "2000-01-01", ...currentUser });
-  }, [currentUser, router]);
+  }, [loaded, currentUser, router]);
 
-  const signout = () => {
+  const updateProfile = async () => {
+    if (!profile) return;
+    const updated = await client.updateUser(profile);
+    setCurrentUser(updated);
+  };
+
+  const signout = async () => {
+    await client.signout();
     setCurrentUser(null);
     router.push("/account/signin");
   };
@@ -85,6 +94,14 @@ export default function Profile() {
         <option value="FACULTY">Faculty</option>
         <option value="STUDENT">Student</option>
       </select>
+      <button
+        type="button"
+        onClick={updateProfile}
+        id="wd-update-btn"
+        className="mb-2 block w-full rounded bg-blue-600 px-3 py-2 text-center text-white"
+      >
+        Update
+      </button>
       <button
         type="button"
         onClick={signout}

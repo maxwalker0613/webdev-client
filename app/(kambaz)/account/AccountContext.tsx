@@ -1,21 +1,44 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import usersJson from "../database/users.json";
+import * as client from "./client";
 
 export type User = (typeof usersJson)[number];
 
 type AccountContextValue = {
   currentUser: User | null;
   setCurrentUser: (user: User | null) => void;
+  loaded: boolean;
 };
 
 const AccountContext = createContext<AccountContextValue | null>(null);
 
 export function AccountProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        setCurrentUser(await client.profile());
+      } catch {
+        setCurrentUser(null);
+      } finally {
+        setLoaded(true);
+      }
+    };
+    fetchProfile();
+  }, []);
+
   return (
-    <AccountContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AccountContext.Provider value={{ currentUser, setCurrentUser, loaded }}>
       {children}
     </AccountContext.Provider>
   );

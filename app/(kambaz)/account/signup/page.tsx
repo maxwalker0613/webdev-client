@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAccountContext } from "../AccountContext";
+import * as client from "../client";
 
 const field = "mb-2 w-full rounded border border-neutral-300 px-3 py-2";
 
@@ -11,30 +12,44 @@ export default function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { setCurrentUser } = useAccountContext();
   const router = useRouter();
 
-  const signup = () => {
+  const signup = async () => {
     if (!username || !password || password !== verifyPassword) return;
-    setCurrentUser({
-      _id: crypto.randomUUID(),
-      username,
-      password,
-      firstName: "",
-      lastName: "",
-      email: "",
-      role: "STUDENT",
-      loginId: "",
-      section: "",
-      lastActivity: "",
-      totalActivity: "",
-    });
-    router.push("/account/profile");
+    try {
+      const current = await client.signup({
+        username,
+        password,
+        firstName: "",
+        lastName: "",
+        email: "",
+        role: "STUDENT",
+        loginId: "",
+        section: "",
+        lastActivity: "",
+        totalActivity: "",
+      });
+      setCurrentUser(current);
+      router.push("/account/profile");
+    } catch (error) {
+      const e = error as { response?: { data?: { message?: string } } };
+      setErrorMessage(e.response?.data?.message ?? "Unable to sign up");
+    }
   };
 
   return (
     <div id="wd-signup-screen" className="max-w-sm">
       <h1 className="mb-3 text-2xl font-semibold">Sign up</h1>
+      {errorMessage && (
+        <p
+          id="wd-signup-error"
+          className="mb-2 rounded bg-red-100 px-3 py-2 text-red-800"
+        >
+          {errorMessage}
+        </p>
+      )}
       <input
         placeholder="username"
         id="wd-username"
