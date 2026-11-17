@@ -10,21 +10,31 @@ const inputClass =
   "mb-2 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5";
 
 export default function Dashboard() {
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [myCourses, setMyCourses] = useState<Course[]>([]);
+  const [allCourses, setAllCourses] = useState<Course[]>([]);
+  const [showAll, setShowAll] = useState(false);
   const [course, setCourse] = useState<Course>(emptyCourse);
   const { currentUser } = useAccountContext();
 
   const fetchCourses = useCallback(async () => {
     try {
-      setCourses(await client.findMyCourses());
+      setMyCourses(await client.findMyCourses());
     } catch {
-      setCourses([]);
+      setMyCourses([]);
+    }
+    try {
+      setAllCourses(await client.fetchAllCourses());
+    } catch {
+      setAllCourses([]);
     }
   }, []);
 
   useEffect(() => {
     fetchCourses();
   }, [currentUser, fetchCourses]);
+
+  const enrolledIds = new Set(myCourses.map((c) => c._id));
+  const visibleCourses = showAll ? allCourses : myCourses;
 
   const onAddCourse = async () => {
     if (!currentUser) return;
@@ -33,15 +43,25 @@ export default function Dashboard() {
   };
   const onDeleteCourse = async (courseId: string) => {
     await client.deleteCourse(courseId);
-    setCourses(courses.filter((c) => c._id !== courseId));
+    await fetchCourses();
   };
   const onUpdateCourse = async () => {
     try {
-      const updated = await client.updateCourse(course);
-      setCourses(courses.map((c) => (c._id === updated._id ? updated : c)));
+      await client.updateCourse(course);
+      await fetchCourses();
     } catch {
       /* the selected course no longer exists on the server */
     }
+  };
+  const onEnroll = async (courseId: string) => {
+    if (!currentUser) return;
+    await client.enrollIntoCourse(currentUser._id, courseId);
+    await fetchCourses();
+  };
+  const onUnenroll = async (courseId: string) => {
+    if (!currentUser) return;
+    await client.unenrollFromCourse(currentUser._id, courseId);
+    await fetchCourses();
   };
 
   return (
@@ -96,17 +116,34 @@ export default function Dashboard() {
         id="wd-course-description"
       />
       <hr />
-      <h2 id="wd-dashboard-published">
-        Published Courses ({courses.length})
-      </h2>{" "}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 id="wd-dashboard-published">
+          Published Courses ({visibleCourses.length})
+        </h2>
+        <button
+          type="button"
+          id="wd-enrollments-toggle"
+          className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
+          onClick={() => setShowAll(!showAll)}
+        >
+          {showAll ? "My Courses" : "Enrollments"}
+        </button>
+      </div>{" "}
       <hr />
       <div id="wd-dashboard-courses" className="flex flex-wrap gap-8">
-        {courses.map((c) => (
+        {visibleCourses.map((c) => (
           <CourseCard
             key={c._id}
             course={c}
             onEdit={() => setCourse(c)}
             onDelete={() => onDeleteCourse(c._id)}
+            enrollment={
+              showAll && currentUser
+                ? enrolledIds.has(c._id)
+                  ? { label: "Unenroll", onClick: () => onUnenroll(c._id) }
+                  : { label: "Enroll", onClick: () => onEnroll(c._id) }
+                : undefined
+            }
           />
         ))}
       </div>

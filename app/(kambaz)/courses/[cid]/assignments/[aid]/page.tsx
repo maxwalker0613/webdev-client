@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import * as db from "../../../../database";
+import { useParams, useRouter } from "next/navigation";
+import * as client from "../client";
 
 const input =
   "w-full rounded border border-neutral-300 bg-white px-3 py-1.5 text-sm";
@@ -18,28 +22,80 @@ const entryOptions = [
   { id: "wd-file-upload", label: "File Upload", checked: false },
 ];
 
-export default async function AssignmentEditor({
-  params,
-}: {
-  params: Promise<{ cid: string; aid: string }>;
-}) {
-  const { cid, aid } = await params;
-  const assignment = db.assignments.find((a) => a._id === aid);
+export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const courseId = typeof cid === "string" ? cid : "";
+  const assignmentId = typeof aid === "string" ? aid : "";
+  const isNew = assignmentId === "new";
+  const router = useRouter();
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    points: "100",
+    due: "",
+    available: "",
+  });
+  const [loadError, setLoadError] = useState("");
+
+  useEffect(() => {
+    if (isNew || !assignmentId) return;
+    const load = async () => {
+      try {
+        const a = await client.findAssignmentById(assignmentId);
+        setForm({
+          title: a.title ?? "",
+          description: a.description ?? "",
+          points: String(a.points ?? ""),
+          due: a.due ?? "",
+          available: a.available ?? "",
+        });
+      } catch {
+        setLoadError("Assignment not found");
+      }
+    };
+    load();
+  }, [assignmentId, isNew]);
+
+  const save = async () => {
+    const payload = {
+      title: form.title,
+      description: form.description,
+      points: Number(form.points) || 0,
+      due: form.due,
+      available: form.available,
+    };
+    if (isNew) {
+      await client.createAssignmentForCourse(courseId, payload);
+    } else {
+      await client.updateAssignment({ _id: assignmentId, ...payload });
+    }
+    router.push(`/courses/${courseId}/assignments`);
+  };
+
   return (
     <div id="wd-assignments-editor" className="max-w-3xl">
+      {loadError && (
+        <p className="mb-4 rounded bg-red-100 px-3 py-2 text-red-800">
+          {loadError}
+        </p>
+      )}
       <label htmlFor="wd-name" className={fieldLabel}>
         Assignment Name
       </label>
       <input
         id="wd-name"
-        defaultValue={assignment?.title ?? ""}
+        value={form.title}
+        onChange={(e) => setForm({ ...form, title: e.target.value })}
         className={`${input} mb-4`}
       />
-      <div className="mb-4 text-sm text-neutral-600">Assignment id: {aid}</div>
+      <div className="mb-4 text-sm text-neutral-600">
+        Assignment id: {assignmentId}
+      </div>
       <textarea
         id="wd-description"
         rows={6}
-        defaultValue={assignment?.description ?? ""}
+        value={form.description}
+        onChange={(e) => setForm({ ...form, description: e.target.value })}
         className={`${input} mb-4`}
       />
 
@@ -49,7 +105,8 @@ export default async function AssignmentEditor({
         </label>
         <input
           id="wd-points"
-          defaultValue={assignment?.points ?? ""}
+          value={form.points}
+          onChange={(e) => setForm({ ...form, points: e.target.value })}
           className={input}
         />
       </div>
@@ -128,7 +185,8 @@ export default async function AssignmentEditor({
           <input
             id="wd-due-date"
             type="date"
-            defaultValue={assignment?.due}
+            value={form.due}
+            onChange={(e) => setForm({ ...form, due: e.target.value })}
             className={`${input} mb-3`}
           />
           <div className="flex gap-3">
@@ -139,7 +197,10 @@ export default async function AssignmentEditor({
               <input
                 id="wd-available-from"
                 type="date"
-                defaultValue={assignment?.available}
+                value={form.available}
+                onChange={(e) =>
+                  setForm({ ...form, available: e.target.value })
+                }
                 className={input}
               />
             </div>
@@ -168,19 +229,20 @@ export default async function AssignmentEditor({
       <hr className="my-4" />
       <div className="flex justify-end gap-2">
         <Link
-          href={`/courses/${cid}/assignments`}
+          href={`/courses/${courseId}/assignments`}
           id="wd-cancel"
           className="rounded border border-neutral-300 bg-neutral-100 px-4 py-1.5 text-sm text-neutral-900 no-underline"
         >
           Cancel
         </Link>
-        <Link
-          href={`/courses/${cid}/assignments`}
+        <button
+          type="button"
           id="wd-save"
-          className="rounded border border-red-600 bg-red-600 px-4 py-1.5 text-sm text-white no-underline"
+          onClick={save}
+          className="rounded border border-red-600 bg-red-600 px-4 py-1.5 text-sm text-white"
         >
           Save
-        </Link>
+        </button>
       </div>
     </div>
   );

@@ -1,16 +1,35 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
-import * as db from "../../../database";
+import * as client from "./client";
 
-export default async function Assignments({
-  params,
-}: {
-  params: Promise<{ cid: string }>;
-}) {
-  const { cid } = await params;
-  const assignments = db.assignments.filter(
-    (assignment) => assignment.course === cid,
-  );
+export default function Assignments() {
+  const { cid } = useParams();
+  const courseId = typeof cid === "string" ? cid : "";
+  const [assignments, setAssignments] = useState<client.Assignment[]>([]);
+
+  const fetchAssignments = useCallback(async () => {
+    if (!courseId) return;
+    try {
+      setAssignments(await client.findAssignmentsForCourse(courseId));
+    } catch {
+      setAssignments([]);
+    }
+  }, [courseId]);
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [fetchAssignments]);
+
+  const onDeleteAssignment = async (assignmentId: string) => {
+    await client.deleteAssignment(assignmentId);
+    setAssignments(assignments.filter((a) => a._id !== assignmentId));
+  };
+
   return (
     <div id="wd-assignments">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -30,13 +49,13 @@ export default async function Assignments({
           >
             <FaPlus /> Group
           </button>
-          <button
+          <Link
             id="wd-add-assignment"
-            type="button"
-            className="inline-flex items-center gap-1 rounded border border-red-600 bg-red-600 px-3 py-1.5 text-sm text-white"
+            href={`/courses/${courseId}/assignments/new`}
+            className="inline-flex items-center gap-1 rounded border border-red-600 bg-red-600 px-3 py-1.5 text-sm text-white no-underline"
           >
             <FaPlus /> Assignment
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -56,10 +75,11 @@ export default async function Assignments({
         {assignments.map((assignment) => (
           <AssignmentItem
             key={assignment._id}
-            cid={cid}
+            cid={courseId}
             aid={assignment._id}
             title={assignment.title}
             details={`Multiple Modules | Not available until ${assignment.available} | Due ${assignment.due} | ${assignment.points} pts`}
+            onDelete={() => onDeleteAssignment(assignment._id)}
           />
         ))}
       </ul>

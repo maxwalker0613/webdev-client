@@ -8,10 +8,12 @@ export default function CourseCard({
   course,
   onEdit,
   onDelete,
+  enrollment,
 }: {
   course: Course;
   onEdit: () => void;
   onDelete: () => void;
+  enrollment?: { label: "Enroll" | "Unenroll"; onClick: () => void };
 }) {
   return (
     <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded border border-neutral-300 bg-white">
@@ -61,6 +63,23 @@ export default function CourseCard({
           >
             Delete
           </button>
+          {enrollment && (
+            <button
+              type="button"
+              id={`wd-${enrollment.label.toLowerCase()}-course-click`}
+              className={`ms-2 inline-flex items-center justify-center rounded px-3 py-1.5 text-sm font-medium text-white ${
+                enrollment.label === "Enroll"
+                  ? "bg-green-600"
+                  : "bg-neutral-600"
+              }`}
+              onClick={(event) => {
+                event.preventDefault();
+                enrollment.onClick();
+              }}
+            >
+              {enrollment.label}
+            </button>
+          )}
         </div>
       </Link>
     </div>

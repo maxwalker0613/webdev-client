@@ -43,3 +43,11 @@ export const updateModule = async (module: { _id: string }) => {
   const { data } = await axiosWithCredentials.put(`${MODULES_API}/${module._id}`, module);
   return data;
 };
+export const enrollIntoCourse = async (userId: string, courseId: string) => {
+  const { data } = await axiosWithCredentials.post(`${USERS_API}/${userId}/courses/${courseId}`);
+  return data;
+};
+export const unenrollFromCourse = async (userId: string, courseId: string) => {
+  const { data } = await axiosWithCredentials.delete(`${USERS_API}/${userId}/courses/${courseId}`);
+  return data;
+};
