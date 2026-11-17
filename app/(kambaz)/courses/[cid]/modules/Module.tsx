@@ -2,37 +2,41 @@
 
 import type { ReactNode } from "react";
 import ModuleControlButtons from "./ModuleControlButtons";
-import {
-  useModulesStore,
-  type CourseModule,
-} from "../../../store/modulesStore";
+import type { CourseModule } from "../../../store/modulesStore";
 
 export default function Module({
   module,
+  onEdit,
+  onChangeName,
+  onUpdate,
+  onRemove,
   children,
 }: {
   module: CourseModule;
+  onEdit: () => void;
+  onChangeName: (name: string) => void;
+  onUpdate: (module: CourseModule) => void;
+  onRemove: () => void;
   children?: ReactNode;
 }) {
-  const updateModule = useModulesStore((state) => state.updateModule);
   return (
     <li className="wd-module mb-5 overflow-hidden border border-neutral-300">
       <div className="wd-title flex items-center justify-between bg-neutral-100 p-3 font-semibold">
         {module.editing ? (
           <input
             className="w-1/2 rounded border border-neutral-300 px-2 py-1 text-base"
-            defaultValue={module.name}
-            onChange={(e) => updateModule({ ...module, name: e.target.value })}
+            value={module.name}
+            onChange={(e) => onChangeName(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                updateModule({ ...module, editing: false });
+                onUpdate({ ...module, editing: false });
               }
             }}
           />
         ) : (
           <span>{module.name}</span>
         )}
-        <ModuleControlButtons moduleId={module._id} />
+        <ModuleControlButtons onEdit={onEdit} onRemove={onRemove} />
       </div>
       <ul className="wd-lessons m-0 list-none p-0">{children}</ul>
     </li>

@@ -1,32 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
-import {
-  emptyCourse,
-  useCoursesStore,
-  type Course,
-} from "../store/coursesStore";
-import * as db from "../database";
+import { emptyCourse, type Course } from "../store/coursesStore";
 import { useAccountContext } from "../account/AccountContext";
+import * as client from "../courses/client";
 
 const inputClass =
   "mb-2 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5";
 
 export default function Dashboard() {
-  const courses = useCoursesStore((state) => state.courses);
-  const addCourse = useCoursesStore((state) => state.addCourse);
-  const updateCourse = useCoursesStore((state) => state.updateCourse);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [course, setCourse] = useState<Course>(emptyCourse);
   const { currentUser } = useAccountContext();
-  const visibleCourses = currentUser
-    ? courses.filter((c) =>
-        db.enrollments.some(
-          (enrollment) =>
-            enrollment.user === currentUser._id && enrollment.course === c._id,
-        ),
-      )
-    : courses;
+
+  const fetchCourses = useCallback(async () => {
+    try {
+      setCourses(await client.findMyCourses());
+    } catch {
+      setCourses([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser, fetchCourses]);
+
+  const onAddCourse = async () => {
+    if (!currentUser) return;
+    await client.createCourse(course);
+    await fetchCourses();
+  };
+  const onDeleteCourse = async (courseId: string) => {
+    await client.deleteCourse(courseId);
+    setCourses(courses.filter((c) => c._id !== courseId));
+  };
+  const onUpdateCourse = async () => {
+    try {
+      const updated = await client.updateCourse(course);
+      setCourses(courses.map((c) => (c._id === updated._id ? updated : c)));
+    } catch {
+      /* the selected course no longer exists on the server */
+    }
+  };
 
   return (
     <div id="wd-dashboard">
@@ -37,7 +53,7 @@ export default function Dashboard() {
           type="button"
           className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
           id="wd-add-new-course-click"
-          onClick={() => addCourse(course)}
+          onClick={onAddCourse}
         >
           Add
         </button>
@@ -45,7 +61,7 @@ export default function Dashboard() {
           type="button"
           className="rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium"
           id="wd-update-course-click"
-          onClick={() => updateCourse(course)}
+          onClick={onUpdateCourse}
         >
           Update
         </button>
@@ -81,12 +97,17 @@ export default function Dashboard() {
       />
       <hr />
       <h2 id="wd-dashboard-published">
-        Published Courses ({visibleCourses.length})
+        Published Courses ({courses.length})
       </h2>{" "}
       <hr />
       <div id="wd-dashboard-courses" className="flex flex-wrap gap-8">
-        {visibleCourses.map((c) => (
-          <CourseCard key={c._id} course={c} onEdit={() => setCourse(c)} />
+        {courses.map((c) => (
+          <CourseCard
+            key={c._id}
+            course={c}
+            onEdit={() => setCourse(c)}
+            onDelete={() => onDeleteCourse(c._id)}
+          />
         ))}
       </div>
     </div>

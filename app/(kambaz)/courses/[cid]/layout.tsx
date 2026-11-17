@@ -1,11 +1,12 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { FaAlignJustify } from "react-icons/fa6";
 import CourseNavigation from "./Navigation";
 import Breadcrumb from "./Breadcrumb";
-import { useCoursesStore } from "../../store/coursesStore";
+import type { Course } from "../../store/coursesStore";
+import * as client from "../client";
 
 export default function CoursesLayout({
   children,
@@ -14,9 +15,20 @@ export default function CoursesLayout({
 }>) {
   const { cid } = useParams();
   const courseId = typeof cid === "string" ? cid : "";
-  const courses = useCoursesStore((state) => state.courses);
-  const course = courses.find((c) => c._id === courseId);
+  const [course, setCourse] = useState<Course | undefined>(undefined);
   const [showCourseNav, setShowCourseNav] = useState(true);
+
+  useEffect(() => {
+    const loadCourse = async () => {
+      try {
+        const courses: Course[] = await client.fetchAllCourses();
+        setCourse(courses.find((c) => c._id === courseId));
+      } catch {
+        setCourse(undefined);
+      }
+    };
+    loadCourse();
+  }, [courseId]);
 
   return (
     <div id="wd-courses">

@@ -1,6 +1,10 @@
 import ModuleEditor from "./ModuleEditor";
 
-export default function ModulesControls() {
+export default function ModulesControls({
+  onAdd,
+}: {
+  onAdd: (name: string) => void;
+}) {
   return (
     <div
       id="wd-modules-controls"
@@ -25,7 +29,7 @@ export default function ModulesControls() {
         <option value="publish-all">Publish All</option>
         <option value="unpublish-all">Unpublish All</option>
       </select>
-      <ModuleEditor />
+      <ModuleEditor onAdd={onAdd} />
     </div>
   );
 }
