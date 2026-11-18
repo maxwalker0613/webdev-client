@@ -59,6 +59,12 @@ const LINKS = [
     match: () => false,
   },
   {
+    href: "https://webdev-server-yni0.onrender.com",
+    id: "wd-toc-render-api",
+    label: "Render API",
+    match: () => false,
+  },
+  {
     href: "/",
     id: "wd-kambaz-link",
     label: "Kambaz",

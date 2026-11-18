@@ -45,6 +45,16 @@ export default function Labs() {
             Node GitHub repository
           </a>
         </li>
+        <li>
+          <a
+            href="https://webdev-server-yni0.onrender.com"
+            id="wd-render-api"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Render API
+          </a>
+        </li>
       </ul>
     </div>
   );
